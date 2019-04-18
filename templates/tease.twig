@@ -1,0 +1,14 @@
+<div class="column">
+	<article class="tease tease-{{post.post_type}}  animated bounceInLeft duration1 eds-on-scroll" id="tease-{{post.ID}}">
+		{% block content %}
+			{% if post.get_thumbnail and post.thumbnail.src  %}
+				<figure>
+					<img src="{{post.thumbnail.src}}" class='tease-post-thumbnail'/>
+				</figure>
+			{% endif %}
+			<h2 class="h2"><a href="{{post.link}}">{{post.title}}</a></h2>
+			<p>{{post.get_preview(20, true ,'dalej')}}</p>
+			<time class="tease-time">{{ post.date | date('j M Y') }} </time>
+		{% endblock %}
+	</article>
+</div>

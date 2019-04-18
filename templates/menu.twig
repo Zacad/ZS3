@@ -1,0 +1,10 @@
+{% if menu %}
+	<ul class='vertical large-horizontal menu' data-responsive-menu="accordion large-dropdown">
+	{% for item in menu %}
+		<li class="{{item.classes | join(' ')}}">
+			<a href="#">{{item.title}}</a>
+			{% include "menu2.twig" with {'menu': item.get_children} %}
+		</li>
+	{% endfor %}
+	</ul>
+{% endif %}

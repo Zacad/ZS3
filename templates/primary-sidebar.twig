@@ -1,0 +1,43 @@
+{{ primary_sidebar }}
+
+<section class="boczne animated bounceInRight duration1 eds-on-scroll">
+  {% if menu %}
+  	<ul class='menu vertical'>
+  	{% for item in boczne %}
+  		<li class="{{item.classes | join(' ')}}">
+  			<a href="{{item.get_link}}">{{item.title}}</a>
+  		</li>
+  	{% endfor %}
+  	</ul>
+  {% endif %}
+</section>
+
+<section class="klasy animated bounceInRight duration1 eds-on-scroll ">
+
+  <h3>liceum</h3>
+  <div class="row small-up-2">
+  {% for key, item in klasy.liceum %}
+    <div class="column klasa">
+      <div>
+        <a href="{{item.link}}">
+          <img src="{{item.icon}}" alt="{{key}}">
+          <p>{{ key }}</p>
+        </a>
+      </div>
+    </div>
+  {% endfor %}
+  </div>
+
+  <h3>technikum</h3>
+  <div class="row small-up-2">
+  {% for key, item in klasy.technikum %}
+    <div class="column klasa">
+      <div>
+        <a href="{{item.link}}"><img src="{{item.icon}}" alt="{{key}}"></a>
+        <p>{{ key }}</p>
+      </div>
+    </div>
+  {% endfor %}
+  </div>
+
+</section>

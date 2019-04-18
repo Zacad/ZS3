@@ -1,0 +1,36 @@
+{% extends "base.twig" %}
+
+{% block content %}
+	<div class="row small-up-1 medium-up-2">
+	{% for post in posts %}
+		{% include ['tease-'~post.post_type~'.twig', 'tease.twig'] %}
+	{% endfor %}
+	</div>
+	{% if home %}
+		<div class="home-wiecej">
+			<a href="{{site.url}}/nowosci/">więcej aktualności</a>
+		</div>
+	{% else %}
+	<div class="tool-pagination">
+	    {% if posts.pagination.prev %}
+	        <a href="{{posts.pagination.prev.link}}" class="prev {{posts.pagination.prev.link|length ? '' : 'invisible'}}">Prev</a>
+	    {% endif %}
+	    <ul class="pages">
+	        {% for page in posts.pagination.pages %}
+	            <li>
+	                {% if page.link %}
+	                    <a href="{{page.link}}" class="{{page.class}}">{{page.title}}</a>
+	                {% else %}
+	                    <span class="{{page.class}}">{{page.title}}</span>
+	                {% endif %}
+	            </li>
+	        {% endfor %}
+	    </ul>
+	    {% if posts.pagination.next %}
+	        <a href="{{posts.pagination.next.link}}" class="next {{posts.pagination.next.link|length ? '' : 'invisible'}}">Next</a>
+	    {% endif %}
+	</div>
+
+	{% endif %}
+
+{% endblock %}

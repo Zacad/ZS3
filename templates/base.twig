@@ -1,0 +1,112 @@
+{% block html_head_container %}
+
+{% include 'html-header.twig' %}
+	{% block head %}
+	{% endblock %}
+	</head>
+{% endblock %}
+
+	<body class="{{body_class}}" data-template="base.twig">
+		<div data-sticky-container>
+			<div class='top-bar sticky' data-sticky data-options="marginTop:0;" style="width:100%" data-top-anchor="2">
+				<div class="top-bar-left">
+					<a href="{{site.url}}"><img src="{{theme.link}}/inc/images/logo.png" alt="{{site.name}}" class="top-bar-logo"></a>
+					<span data-responsive-toggle="nav-main" data-hide-for="large">
+							<button class="" type="button" data-toggle><span class="menu-icon dark"></span>menu</button>
+					</span>
+				</div>
+				<div class='top-bar-right'>
+					<nav id="nav-main" class="nav-main" role="navigation">
+						{% include "menu.twig" with {'menu': menu.get_items} %}
+					</nav><!-- #nav -->
+				</div>
+			</div>
+		</div>
+		<header class="header"  >
+			{% block header %}
+				<div class="row banner">
+					<div class="small-12 large-5 columns kochanowski show-for-large">
+						<img src="{{theme.link}}/inc/images/kochanowski.png" class="animated fadeInLeft duration3 delay1">
+					</div>
+					<div class="small-12 large-7 columns home-logo">
+							<div class="row">
+							<div class="small-12 large-4 columns">
+								<img src="{{theme.link}}/inc/images/logo.png" class="animated zoomIn duration2 delay1">
+							</div>
+							<div class="small-12 large-8 columns">
+								<h1 class="hdr-logo" role="banner">
+									<a class="hdr-logo-link" href="{{site.url}}" rel="home"><img src="{{theme.link}}/inc/images/nazwa.png" alt="{{site.name}}" class="home-nazwa animated zoomIn duration2 delay1"></a>
+								</h1>
+							</div>
+						</div>
+						<div class="row small-up-2 large-up-4 header-links">
+							{% for key, item in header_links %}
+								<div class="column header-link animated fadeInUp duration2 delay2">
+									<div>
+										<a href="{{item.link}}">
+											<img src="{{item.icon}}" alt="{{key}}">
+											<span>{{key}}</span>
+										</a>
+									</div>
+								</div>
+							{% endfor %}
+						</div>
+					</div>
+				</div>
+			{% endblock %}
+		</header>
+
+		<section id="content" role="main" class="content-wrapper">
+			<div class="row">
+				{% if title %}<h1 class="article-h1">{{title}}</h1>{% endif %}
+			</div>
+			<div class="row">
+				<div class="wrapper small-12 large-8 columns {{sidebar_class}}">
+					{% if home %}
+						<div class='aktualne_sidebar'>
+							{{ aktualne_sidebar }}
+						</div>
+					{% endif %}
+					{% block content %}
+						Sorry, no content
+					{% endblock %}
+				</div>
+				{% if sidebar %}
+					<aside class="layout-sidebar small-12 large-4 columns">
+						{{sidebar}}
+					</aside>
+				{% endif %}
+				{% if primary_sidebar %}
+					<aside class="layout-sidebar small-12 large-4 columns">
+						{% include 'primary-sidebar.twig' with {'boczne': boczne.get_items} %}
+					</aside>
+				{% endif %}
+		</div>
+		</section>
+
+		<section class="linki">
+			<div class="row">
+				<div class="small-12 large-3 columns tytul">
+					<div class="">
+						<h2>Odnośniki</h2>
+					</div>
+				</div>
+				<div class="small-12 large-9 columns">
+					<div class="row small-up-2 large-up-4 home-linki">
+						{% for link in linki %}
+							<div class="column  animated bounceIn duration2 eds-on-scroll ">
+								<a href="{{ link.href }}"><img src="{{ link.thumbnail.src}}" alt="{{ link.title }}"</a>
+							</div>
+						{% endfor %}
+					</div>
+			</div>
+		</section>
+
+		{% block footer %}
+			<footer id="footer">
+				{% include 'footer.twig' %}
+			</footer>
+			{{ function('wp_footer') }}
+		{% endblock %}
+	</body>
+</html>
